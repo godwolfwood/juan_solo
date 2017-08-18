@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Create new Wish</title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static "exam/style.css" %}">
+    </head>
+    <body>
+        <div class="wrapper">
+            <a href="{% url 'login_success' %}">Home</a>
+            <a href="{% url 'login_index' %}">Logout</a>
+            <h1>Create a New Wish List Item</h1>
+
+            <form action="{% url 'login_create' %}" method="post">
+                {%csrf_token%}
+                <lable>Item/Product:</lable> 
+                <input type="text" name="name">
+                <input type="submit" value="Add">
+            </form>
+
+            {%if messages%}
+                {%for error in messages%}
+                    <p>{{error}}</p>
+                {%endfor%}
+            {%endif%}
+        </div>
+    </body>
+</html>

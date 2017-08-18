@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Create new Wish</title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static "exam/style.css" %}">
+    </head>
+    <body>
+        <div class="wrapper">
+            <a href="{% url 'login_success' %}">Home</a>
+            <a href="{% url 'login_index' %}">Logout</a>
+            <h1>{{wish.name}}</h1>
+            <p>Users who added this product/item under their wish list:</p>
+            {% for item in list%}
+                <p>{{item.name}}<p>
+            {% endfor %}
+        </div>
+    </body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Dashboard</title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static "exam/style.css" %}">
+    </head>
+    <body>
+        <div class="wrapper">
+            <a href="{% url 'login_index' %}">Logout</a>
+            <h1>Hello, {{user.name}}</h1>
+            
+            <table>
+                <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Added by</th>
+                    <th>Date Added</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in list%}
+                    <tr>
+                    <td><a href="{% url 'login_show' number=item.id %}">{{item.name}}</a></td>
+                    <td>{{item.user.name}}</td>
+                    <td>{{item.created_at}}</td>
+                    <td>
+                        {% if item.user.name == user.name%}
+                            <a href="{% url 'login_delete' number=item.id %}">Delete</a>
+                        {% else %}
+                            <a href="{% url 'login_remove' number=item.id %}">Remove From my Wishlist</a>
+                        {% endif %}
+                    </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <h3>Other Users' Wish List</h3>
+            <table>
+                    <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Added by</th>
+                        <th>Date Added</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in all_wish%}
+                        <tr>
+                        <td><a href="{% url 'login_show' number=item.id %}">{{item.name}}</a></td>
+                        <td>{{item.user.name}}</td>
+                        <td>{{item.created_at}}</td>
+                        <td><a href="{% url 'login_wish_add' number=item.id %}">Add to my Wishlist</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            <a href="{% url 'login_add' %}">Add Item</a>
+        </div>
+    </body>
+</html>
