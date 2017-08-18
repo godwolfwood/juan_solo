@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.db import models
 import re
 
+EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 # Create your models here.
 class UserManager(models.Manager):
@@ -11,14 +12,22 @@ class UserManager(models.Manager):
         errors = {}
         if len(postData["name"]) < 2:
             errors["name"] = "Name should be more than 3 characters"
+
         if len(postData["username"]) < 2:
             errors["username"] = "Name should be more than 3 characters"
+        
+        if not EMAIL_REGEX.match(postData["email"]):
+            errors["email"] = "Entered an invalid email" 
+        
         if len(postData["password"]) < 8:
             errors["password"] = "Password should be more than 8 characters"
+
         if postData["password"] != postData["confirm"]:
             errors["confirm"] = "Passwords don't match"
+
         if len(postData["date_hired"]) < 1:
             errors["date_hired"] = "Date hired cant be empty"
+            
         return errors;
 
 class User(models.Model):
