@@ -14,7 +14,7 @@ def success(request):
     context = {
         "user": user,
         "list": user.liked_list.all(),
-        "all_wish": Wish.objects.exclude(user = user),
+        "all_wish": Wish.objects.exclude(wish_by = user)
     }
     return render(request, "exam/dashboard.html", context)
 
