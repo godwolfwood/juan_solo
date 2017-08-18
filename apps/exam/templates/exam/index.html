@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static "login_reg/style.css" %}">
+    </head>
+    <body>
+        <div class="wrapper">
+            <h1>Registration</h1>
+            <form action="{% url 'login_register' %}" method="post">
+                {%csrf_token%}
+                <lable>First Name:</lable> 
+                <input type="text" name="first_name">
+                <lable>Last Name:</lable> 
+                <input type="text" name="last_name">
+                <lable>Email:</lable> 
+                <input type="text" name="email">
+                <lable>Password:</lable>
+                <input type="password" name="password">
+                <lable>Confirm Password:</lable> 
+                <input type="password" name="confirm">
+                <input type="submit" value="Register">
+            </form>
+            {%if messages%}
+                {%for error in messages%}
+                    <p>{{error}}</p>
+                {%endfor%}
+            {%endif%}
+            <h1>Login</h1>
+            <form action="{% url 'login_login' %}" method="post">
+                {%csrf_token%}
+                <lable>Email:</lable> 
+                <input type="text" name="email">
+                <lable>Password:</lable> 
+                <input type="password" name="password">
+                <input type="submit" value="Login">
+            </form>
+        </div>
+    </body>
+</html>
