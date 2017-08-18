@@ -14,7 +14,7 @@ class UserManager(models.Manager):
             errors["name"] = "Name should be more than 3 characters"
 
         if len(postData["username"]) < 2:
-            errors["username"] = "Name should be more than 3 characters"
+            errors["username"] = "Username should be more than 3 characters"
         
         if not EMAIL_REGEX.match(postData["email"]):
             errors["email"] = "Entered an invalid email" 
@@ -27,7 +27,7 @@ class UserManager(models.Manager):
 
         if len(postData["date_hired"]) < 1:
             errors["date_hired"] = "Date hired cant be empty"
-            
+
         return errors;
 
 class User(models.Model):
